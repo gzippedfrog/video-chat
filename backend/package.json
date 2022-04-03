@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "private": true,
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.15"
+  },
+  "dependencies": {
+    "kurento-client": "6.16.0",
+    "socket.io": "4.4.0"
+  }
+}

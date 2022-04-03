@@ -1,0 +1,22 @@
+version: "3"
+services:
+  frontend:
+    build: frontend
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=https://kurentochat-dm-tse.staging.forasoft.com
+    ports:
+      - "50000:3000"
+  backend:
+    build: backend
+    restart: always
+    environment:
+      - PORT=3001
+    ports:
+      - "50001:3001"
+  kurento:
+    image: kurento/kurento-media-server:6.16
+    network_mode: "host"
