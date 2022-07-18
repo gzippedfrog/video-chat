@@ -5,6 +5,12 @@ import VideoChat from "../components/VideoChat";
 import TextChat from "../components/TextChat";
 import styled from "@emotion/styled";
 
+const Container = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  height: 100%;
+`;
 export default function ChatScreen() {
   const {
     state: { name, streams }
@@ -19,17 +25,10 @@ export default function ChatScreen() {
     console.log("streams:", streams.length, streams);
   }, [streams]);
 
-  const Container = styled.div`
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    height: 100%;
-  `;
-
   return (
     <Container>
-      <VideoChat streams={streams} name={name} />
-      <TextChat name={name} />
+      <VideoChat />
+      <TextChat />
     </Container>
   );
 }

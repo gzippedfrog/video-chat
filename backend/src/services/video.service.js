@@ -28,8 +28,10 @@ exports.getVideoStream = ({ callId }) => streams[callId];
 exports.getStreams = () => streams;
 
 exports.releaseStreams = ({ publishStream, viewStreams }) => {
-  publishStream.endpoint.release();
-  delete streams[publishStream.callId];
+  if (publishStream) {
+    publishStream.endpoint.release();
+    delete streams[publishStream.callId];
+  }
 
   viewStreams.forEach((s) => {
     s.endpoint.release();

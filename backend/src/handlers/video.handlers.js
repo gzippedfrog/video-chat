@@ -67,16 +67,16 @@ exports.disconnect = async (io, socket, user, data) => {
     getRoom().users.map((u) => u.id)
   );
 
-  socket.broadcast.emit(EVENTS.LEFT, user.publishStream.callId);
+  socket.broadcast.emit(EVENTS.USER_LEFT, user.publishStream?.callId);
 };
 
 function logUsers(users) {
   users.forEach((u) => {
     console.log("--user:", u.id);
-    console.log("----p stream:", u.publishStream.callId);
+    console.log("----p stream:", u.publishStream?.callId);
     console.log(
       "----v streams:",
-      u.viewStreams.map((s) => s.callId)
+      u.viewStreams?.map((s) => s.callId)
     );
   });
   console.log("\n");

@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
   const users = room.users;
   let user, id;
 
-  socket.on(EVENTS.JOIN, () => {
+  socket.on(EVENTS.USER_JOIN, () => {
     if (users.length < 4) {
       socket.join("default");
       id = socket.id;
@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
         .filter((u) => u.id != id)
         .map((u) => u.publishStream?.callId);
 
-      socket.emit(EVENTS.JOINED, { id, streamIds });
+      socket.emit(EVENTS.USER_JOINED, { id, streamIds });
     } else {
       socket.emit(EVENTS.ROOM_IS_FULL);
     }

@@ -1,15 +1,16 @@
+import { stun, turn } from "../config/vars";
 import { CONNECTION_TYPES } from "../const/CONNECTION_TYPES";
 import { getConstraints, getUserMedia } from "../utils/mediaDevices";
 
 const configuration = {
   iceServers: [
     {
-      urls: "stun:stun1.l.google.com:19302"
+      urls: stun.url
     },
     {
-      urls: "turn:78.46.107.230:3486",
-      username: "kurentoturn",
-      credential: "kurentoturnpassword"
+      urls: turn.url,
+      username: turn.username,
+      credential: turn.password
     }
   ]
 };

@@ -56,7 +56,7 @@ const VideoChatContextProvider = ({ children }) => {
       await WebRtcController.addIceCandidate({ callId, candidate });
     });
 
-    socket.on(EVENTS.JOINED, async ({ streamIds }) => {
+    socket.on(EVENTS.USER_JOINED, async ({ streamIds }) => {
       await publishStream();
       for (let i = 0; i < streamIds.length; i++) {
         await viewStream(streamIds[i]);
@@ -67,7 +67,7 @@ const VideoChatContextProvider = ({ children }) => {
       await viewStream(callId);
     });
 
-    socket.on(EVENTS.LEFT, (id) => {
+    socket.on(EVENTS.USER_LEFT, (id) => {
       const connections = Object.values(WebRtcController.connections);
 
       const connection = connections.find((c) => c.publishCallId === id);

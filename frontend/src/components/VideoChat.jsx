@@ -1,17 +1,21 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useContext } from "react";
+import { VideoChatContext } from "../context/VideoChatContextProvider";
 import VideoStream from "./VideoStream";
 
-export default function VideoChat({ streams }) {
-  const Container = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: left;
-    gap: 10px;
-    flex: 1;
-    max-height: 100%;
-  `;
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: left;
+  gap: 10px;
+  flex: 1;
+  max-height: 100%;
+`;
+export default function VideoChat() {
+  const {
+    state: { streams }
+  } = useContext(VideoChatContext);
 
   return (
     <Container>

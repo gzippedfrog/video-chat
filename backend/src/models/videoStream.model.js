@@ -1,4 +1,5 @@
 const kurentoClient = require("kurento-client");
+const { stun, turn } = require("../config/vars");
 const IceCandidate = kurentoClient.getComplexType("IceCandidate");
 
 class VideoStream {
@@ -30,11 +31,9 @@ class VideoStream {
   }
 
   async configureEndpoint() {
-    await this.endpoint.setStunServerAddress("stun1.l.google.com");
-    await this.endpoint.setStunServerPort("19302");
-    await this.endpoint.setTurnUrl(
-      "kurentoturn:kurentoturnpassword@78.46.107.230:3486"
-    );
+    await this.endpoint.setStunServerAddress(stun.ip);
+    await this.endpoint.setStunServerPort(stun.port);
+    await this.endpoint.setTurnUrl(turn);
   }
 }
 

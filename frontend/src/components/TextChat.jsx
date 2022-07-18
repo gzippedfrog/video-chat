@@ -1,12 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import socket from "../controllers/SocketController";
 import { EVENTS } from "../const/EVENTS";
 import { Button, TextField, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { VideoChatContext } from "../context/VideoChatContextProvider";
 
-export default function TextChat({ name }) {
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  flex: 0.5;
+  max-width: 400px;
+`;
+
+const MessagesContainer = styled.div`
+  overflow-y: auto;
+`;
+
+export default function TextChat() {
   const [data, setData] = useState([]);
   const [message, setMessage] = useState("");
+  const {
+    state: { name }
+  } = useContext(VideoChatContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,20 +60,7 @@ export default function TextChat({ name }) {
     setMessage(e.target.value);
   };
 
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 100%;
-    flex: 0.5;
-    max-width: 400px;
-  `;
-
-  const MessagesContainer = styled.div`
-    overflow-y: auto;
-  `;
-
-  return (
+  return useMemo(() => (
     <Container>
       <Typography>Username: {name}</Typography>
       <TextField
@@ -82,5 +86,5 @@ export default function TextChat({ name }) {
         <Typography>No messages yet</Typography>
       )}
     </Container>
-  );
+  ));
 }

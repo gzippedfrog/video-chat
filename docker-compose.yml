@@ -7,7 +7,7 @@ services:
       - backend
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=https://kurentochat-dm-tse.staging.forasoft.com
+      - REACT_APP_SOCKET_URL=https://kurentochat-dm-tse.staging.forasoft.com
     ports:
       - "50000:3000"
   backend:
@@ -15,8 +15,12 @@ services:
     restart: always
     environment:
       - PORT=3001
+      - KURENTO_URL=ws://78.46.107.230:8889/kurento
     ports:
       - "50001:3001"
   kurento:
     image: kurento/kurento-media-server:6.16
     network_mode: "host"
+    environment:
+      - KMS_MIN_PORT=50100
+      - KMS_MAX_PORT=50200
